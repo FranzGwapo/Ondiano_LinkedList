@@ -94,16 +94,107 @@ bool insertSorted(List *list, DATA data){
 	
 }
 
-bool searchItem(List list, DATA key);
+bool searchItem(List list, DATA key){
+	while(list!=NULL){
+		if(list->data==key){
+			return true;
+		}
+		list = list->next;
+	}
+	return false;
+}
 
-int getItem(List list, DATA key);
+int getItem(List list, DATA key){
+	int num;
+	while(list!=NULL){
+		if(list->data==key){
+			num = key;
+			return num;
+		}
+		list = list->next;
+	}
+	return -1;
+}
 
-bool deleteFront(List *list);
+bool deleteFront(List *list){
+	if(list!=NULL){
+		*list = (*list)->next;
+		return true;
+	}
+	return false;
+	
+}
 
-bool deleteRear(List *list);
+bool deleteRear(List *list){
+	NodePtr trav = *list;
+	NodePtr temp;
+	if(list!=NULL){
+		while(trav->next!=NULL){
+			temp = trav;
+			trav = trav->next;
+		}
+		temp->next = NULL;
+		return true;
+	}
+	return false;
+	
+	
+}
 
-int deleteAt(List *list, int loc);
+int deleteAt(List *list, int loc){
+	int i, num;
+	bool state;
+	NodePtr trav = *list;
+	NodePtr prev;
+	if(loc==0){
+		num = trav->data;
+		state = deleteFront(list);
+		return num;
+	}
 
-bool deleteItem(List *list, DATA key);
+	for(i=0;i!=loc;++i){
+		prev = trav;
+		trav = trav->next;
+			
+	}
+	if(trav->next==NULL){
+		num = trav->data;
+		state = deleteRear(list);
+		return num;
+	}
+	num = trav->data;
+	prev->next = trav->next;
+	return num;
+	
+}
+
+bool deleteItem(List *list, DATA key){
+	NodePtr trav = *list;
+	NodePtr prev;
+	int count;
+	bool state;
+	
+	while(trav->data!=key && trav->next!=NULL){
+		count++;
+		prev = trav;
+		trav = trav->next;
+	}
+	
+	if(count==0){
+		state = deleteFront(list);
+		return state;	
+	}
+	else if(trav->next==NULL){
+		state = deleteRear(list);
+		return state;
+	}
+	else if(trav->data==key){
+		prev->next = trav->next;
+		return true;
+	}
+	return false;
+	
+	
+}
 
 int deleteAllItem(List *list, DATA key);
