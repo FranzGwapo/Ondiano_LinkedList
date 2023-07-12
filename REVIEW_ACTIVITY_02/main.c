@@ -7,6 +7,7 @@ int main(int argc, char *argv[]) {
 	List head = newList();
 	initList(&head);
 	bool state;
+	int num;
 	state = insertFront(&head, 5);
 	state = insertFront(&head, 6);
 	state = insertFront(&head, 7);
@@ -24,5 +25,31 @@ int main(int argc, char *argv[]) {
 	printf("Insert At:\n");
 	displayList(head);
 	
+	printf("Search Item (6):\n");
+	state = searchItem(head, 6);
+	(state) ? printf("Number 6 is there.\n\n") : printf("Number 6 is not there.\n\n");
+	displayList(head);
+	
+	
+	printf("Get Item (6):\n");
+	num = getItem(head, 6);
+	printf("Number got: %d\n\n", num);
+	
+	printf("Delete Front: \n");
+	deleteFront(&head);
+	displayList(head);
+	
+	printf("Delete Rear: \n");
+	deleteRear(&head);
+	displayList(head);
+	
+	printf("Delete At (Index 3): \n");
+	num = deleteAt(&head, 3);
+	printf("Number deleted: %d\n", num);
+	displayList(head);
+	
+	printf("Delete Item (6): \n");
+	state = deleteItem(&head, 6);
+	displayList(head);
 	return 0;
 }
