@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 	printf("Insert Rear:\n");
 	displayList(head);
 	
-	state = insertAt(&head, 11, 3);
+	state = insertAt(&head, 9, 3);
 	state = insertAt(&head, 12, 5);
 	printf("Insert At:\n");
 	displayList(head);
@@ -50,6 +50,10 @@ int main(int argc, char *argv[]) {
 	
 	printf("Delete Item (6): \n");
 	state = deleteItem(&head, 6);
+	displayList(head);
+	
+	printf("Delete All Item (5): \n");
+	state = deleteAllItem(&head, 9);
 	displayList(head);
 	return 0;
 }
