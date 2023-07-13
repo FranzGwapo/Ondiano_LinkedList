@@ -65,9 +65,6 @@ bool insertAt(List *list, DATA item, int loc){
 	}
 	newPtr->next = temp->next;
 	temp->next = newPtr;
-//	while(temp->next!=loc){
-//		temp = temp->next;
-//	}
 	
 }
 
@@ -197,4 +194,33 @@ bool deleteItem(List *list, DATA key){
 	
 }
 
-int deleteAllItem(List *list, DATA key);
+int deleteAllItem(List *list, DATA key){
+	int count = 0, num;
+	bool state;
+	NodePtr trav = *list;
+	while(trav->next!=NULL){
+		if(trav->data == key && count==0){
+			state = deleteFront(list);
+			count = 0;
+		}
+		else if (trav->data==key && count!=0){
+			num = deleteAt(list, count);
+
+			trav = trav->next;
+		}
+		else{
+			count++;
+			trav = trav->next;	
+		}
+
+	}
+	
+	if(trav->data == key && count==0){
+			state = deleteFront(list);
+			count = 0;
+	}
+	else if(trav->data==key){
+		state = deleteRear(list);
+	}
+	return key;
+}
